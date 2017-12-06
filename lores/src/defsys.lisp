@@ -1,30 +1,14 @@
 ;;; -*- mode:lisp; coding:utf-8  -*-
 
-
-;;;
 ;;; This file is part of the LORES system
+;;; LORES is a tool Moren Environment, designed to help developers deal
+;;; with large programs contained in multiple files (system)
 ;;; Copyright © 2017 Vladimir Mezentsev
-;;;
-;;;
-;;; LORES is free software: you can redistribute it and/or modify it under
-;;; the terms of the GNU General  Public License as published by the Free
-;;; Software Foundation,  either version  3 of the  License, or  (at your
-;;; option) any later version.
-;;;
-;;; LORES is distributed  in the hope that it will  be useful, but WITHOUT
-;;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-;;; for more details.
-;;;
-;;; You should  have received a  copy of  the GNU General  Public License
-;;; Version 3 from  <http://www.gnu.org/licenses/>.
 ;;;
 
 ;;; LORES
 ;;;
-;;; LORES is a tool Moren Environment, designed to help developers deal
-;;; with large programs contained in multiple files (system). LORES setup
-;;; a system by declare:
+;;; LORES setup a system by declare:
 ;;;   -  which files should be included
 ;;;   - and what order they need to be compile.
 ;;;
@@ -38,14 +22,6 @@
 ;;;
 ;;; With LORES,  just issue one function call and the Lores will figure out
 ;;; which files need to be recompiled and will determine correct order.
-;;;
-;;; Moren Environment (Copyright © 2017, Vladimir Mezentsev) a environment
-;;; for the development of programs on the JSCL.
-;;;
-;;; JSCL (Copyright © 2012, 2013 David Vazquez) - a tool for compiling
-;;; the Common Lisp programs for execution in the Java Script environment.
-;;; Implements some subset of the Common Lisp language.
-;;;
 ;;;
 
 
