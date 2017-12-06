@@ -1,0 +1,7 @@
+{
+  "name": "lestrade",
+  "version": "0.1.0",
+  "description": "Moren environment object inspector",
+  "main": "lestrade.js",
+  "license": "GPL-3.0"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "moren-repl",
+  "version": "0.2.1",
+  "description": "Moren environment repl",
+  "main": "moren-repl.js",
+  "license": "GPL-3.0"
+}

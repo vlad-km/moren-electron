@@ -1,0 +1,7 @@
+{
+  "name": "klib",
+  "version": "0.2.1",
+  "description": "Moren environment kernel library",
+  "main": "klib-recom1.js",
+  "license": "GPL-3.0"
+}

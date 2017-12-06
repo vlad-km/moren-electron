@@ -1,0 +1,7 @@
+{
+  "name": "lores",
+  "version": "0.1.1",
+  "description": "Moren environment management resources tool",
+  "main": "reslo.js",
+  "license": "GPL-3.0"
+}
