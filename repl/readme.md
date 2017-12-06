@@ -3,4 +3,6 @@
 
 ## License
 GNU General Public License v3.0
-Copyright Â© 2017 Vladimir Mezentsev
+
+
+Copyright © 2017 Vladimir Mezentsev
