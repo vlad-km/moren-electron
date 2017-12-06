@@ -1,28 +1,11 @@
 ;;; -*- mode:lisp; coding:utf-8  -*-
 
 ;;;
-;;; This file is part of the DASGEN package
+;;; This file is part of the DAS package
+;;; Simple implementation of Generic function for MOREN Environment
 ;;; Copyright © 2017 Vladimir Mezentsev
 ;;;
-;;; DASGEN - simple implementation of Generic function for JSCL.
-;;;
-;;; DASGEN is free software: you can redistribute it and/or modify it under
-;;; the terms of the GNU General  Public License as published by the Free
-;;; Software Foundation,  either version  3 of the  License, or  (at your
-;;; option) any later version.
-;;;
-;;; DASGEN is distributed  in the hope that it will  be useful, but WITHOUT
-;;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-;;; for more details.
-;;;
-;;; You should  have received a  copy of  the GNU General  Public License
-;;; Version 3 from  <http://www.gnu.org/licenses/>.
-;;;
-;;; JSCL   - JSCL is a Common Lisp to Javascript compiler, which is bootstrapped
-;;; from Common Lisp and executed from the browser.
-;;; https://github.com/jscl-project/jscl
-;;;
+
 
 (in-package :das)
 
@@ -53,7 +36,7 @@
 
 
 
-;;(export '(das!structure))
+
 (defmacro structure (name-and-options &rest slots)
     (let* ((name-and-options (ensure-list name-and-options))
            (name (first name-and-options))
