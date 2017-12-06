@@ -1,0 +1,129 @@
+body { background-color: black; font-size: 11px; font-family: Courier;}
+
+#moren-dev-repl-id {
+    //position: fixed;
+    //top: 80px;
+    //left: 20px;
+    margin: 0px 0px 0px 0px;
+    display: block;
+    //opacity: 0.5;
+    background-color: rgba(0,0,0,0.1);
+    font-size: 11px;
+    font-family: Consolas;
+    text-align: left;
+    overflow: hidden;
+    padding: 0px 0px 0px 0px;
+    //width: 95%;
+    //height: 80%;
+    //min-width: 700px;
+    //min-height: 600px;
+    //max-height: 700px;
+    border-radius:9px;
+}
+
+#moren-dev-repl-id pre {
+    background-color: rgba(0,0,0,0.1);
+    border: 1px solid black;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(100, 100, 100, .5);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #818B99;
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    height:4px;
+    max-height: 3px;
+}
+
+::-webkit-scrollbar-corner{
+    border-radius:5px;
+    background-color: gray;
+   //-webkit-box-shadow: inset 0 0 6px green;
+}
+
+
+#console {
+    //position: fixed;
+    //top: 80px;
+    //left: 20px;
+    margin: 0px 0px 0px 0px;
+    display: block;
+    //opacity: 0.5;
+    background-color: rgba(0,0,0,0.1);
+    font-size: 12px;
+    font-family: Consolas;
+    text-align: left;
+    overflow: hidden;
+    padding: 0px 0px 0px 0px;
+    //width: 95%;
+    //height: 80%;
+    //min-width: 700px;
+    //min-height: 600px;
+    //max-height: 700px;
+    border-radius:9px;
+}
+
+#console pre {
+    background-color: rgba(0,0,0,0.1);
+    border: 1px solid black;
+}
+
+.parents {
+    font-weight: bold;
+}
+
+/* The inner console element. */
+.jqconsole {
+    padding: 10px;
+}
+/* The cursor. */
+.jqconsole-cursor {
+    background-color: Yellow;
+}
+/* The cursor color when the console looses focus. */
+.jqconsole-blurred .jqconsole-cursor {
+    background-color: #666;
+}
+/* The current prompt text color */
+.jqconsole-prompt {
+    /* color: green;*/
+    color: Yellow;
+}
+/* The command history */
+.jqconsole-old-prompt {
+    color: white;
+    font-weight: normal;
+}
+/* The text color when in input mode. */
+.jqconsole-input {
+    /*color: green;*/
+    color: white;
+}
+/* Previously entered input. */
+.jqconsole-old-input {
+    color: white;
+    font-weight: normal;
+}
+/* The text color of the output. */
+.jqconsole-output {
+    /* color: red;*/
+    color: Yellow;
+}
+.jqconsole-return, .jqconsole-header {
+    color: white;
+}
+.jqconsole-error {
+    color: red;
+}
