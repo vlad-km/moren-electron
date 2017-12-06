@@ -12,7 +12,7 @@ To compile the programs, it is no longer necessary to use the host compiler (ccl
 In other words, now you do not need to learn, install and configure the Common Lisp compilation environment. The minimum knowledge of the Common Lisp language is still necessary.
 
 Moren, an environment that allows you to compile yourself step by step. All the components of the environment included in this version are compiled in it, without the use of a host compiler.
-The only component for which the host compiler is used (Clozure Common Lisp Version 1.11-r16635 WindowsX8664) is jscl.js with some bugfixes in the original code, for compatibility with Win/7 and speeding up the function `format`. Watch git **vald-km/jscl** **prod** brunch for more details.
+The only component for which the host compiler is used (Clozure Common Lisp Version 1.11-r16635 WindowsX8664) is jscl.js with some fixes in the original code, for compatibility with Win/7 and speeding up the function `format`. Watch git **vald-km/jscl** **prod** brunch for more details.
 
 Moren environment contains all the minimum functionality. Other additions, as necessary, can be developed and debugged in Moren, and added  "on fly."
 
@@ -35,7 +35,6 @@ The final application can be ported to a single bundle for use in a browser, or 
 - **CME**   built-in editor, based on **CodeMirror**
 - **Repl**  Moren environment repl ready for instalation and use (contains all need bundles and folder structures)
 - **sdf**   Collection **Moren environment** system definition files for each components (Lores:defsys syntax)
-- **JSCL.js** JSCL bundle with speed time acceleration of the work of some functions from the original environment (watch git **vald-km/jscl** **prod** brunch for more details). Use it.
 
 ## Documentation
 See the `readme` for each component and the sections of the wiki. Will be addition as they available, asap.
