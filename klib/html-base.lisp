@@ -2,10 +2,7 @@
 
 ;;; HTML - HTML tags definition package
 ;;; This package is part of the MOREN Environment
-;;;
 ;;; Copyright © 2017 Vladimir Mezentsev
-;;;
-;;;
 
 ;;; HTML package base engine for link with Moren kernel lib
 
