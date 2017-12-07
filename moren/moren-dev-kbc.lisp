@@ -197,61 +197,6 @@
 
 ;;; Moren top menu
 ;;;
-#|
-(defun moren-top-menu-template()
-    (vector
-     (mkjso "label" "Moren"
-            "submenu" (vector
-                       (mkjso "label" "Reset console"
-                              "accelerator" "CmdOrCtrl+Shift+R"
-                              "click"
-                              (lambda (item bw event) (%kb-reset-console-fn)))
-
-                       (mkjso "label" "Explore history"
-                              "accelerator" "CmdOrCtrl+Shift+E"
-                              "click"
-                              (lambda (item bw event) (%kb-sh-explore-fn) ))
-
-                       (mkjso "label" "Look history"
-                              "accelerator" "CmdOrCtrl+Shift+L"
-                              "click"
-                              (lambda (item bw event) (%kb-sh-look-fn) ))
-
-                       (mkjso "label" "Take history item"
-                              "accelerator" "CmdOrCtrl+Shift+T"
-                              "click"
-                              (lambda (item bw event) (%kb-sh-take-item-fn) ))
-
-                       (mkjso "label" "Dump history"
-                              "accelerator" "CmdOrCtrl+Shift+D"
-                              "click"
-                              (lambda (item bw event) (%kb-sh-dump-fn) ))
-                       )) ;; end Moren menu
-
-     (mkjso "label" "Edit"
-            "submenu" (vector
-                       (mkjso "label" "Copy"
-                              "role" "copy"
-                              "accelerator" "CmdOrCtrl+C")
-                       (mkjso "label" "Paste"
-                              "role" "paste"
-                              "accelerator" "CmdOrCtrl+V")))
-
-     (mkjso "label" "View"
-            "submenu" (vector
-                       (mkjso "label" "Toggle Developer Tool"
-                              "accelerator" "CmdOrCtrl+Shift+I"
-                              "click"
-                              (lambda (item bw event)
-                                  (when bw
-                                      (funcall ((oget bw "toggleDevTools" "bind") bw)) ))  )))
-
-     (mkjso "label" "Help"
-            "role" "help"
-            "submenu" (vector))
-
-     ))
-|#
 
 (defun moren-top-menu-template()
     (vector
