@@ -49,6 +49,7 @@
     (rx-listen :err #'%repl-print-error)
     (rx-listen :char-out #'%char-out-fn)
     (rx-listen :string-out #'%string-out-fn)
+    (rx-listen :string-html-out #'%string-html-out-fn)
     (rx-listen :err-char-out #'%err-char-out-fn)
     (rx-listen :err-string-out #'%err-string-out-fn)
     (rx-listen :history #'%repl-save-history)

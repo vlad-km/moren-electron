@@ -27,6 +27,7 @@
 
 ;;; output streams
 (defvar *mordev-standard-output* nil)
+(defvar *moren-html-output* nil)
 (defvar *mordev-standard-error* nil)
 
 

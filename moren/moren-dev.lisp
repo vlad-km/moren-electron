@@ -40,13 +40,10 @@
 (in-package :mordev)
 
 
-;;; RX JavaScript emitters
-;;;(defvar *moren-rx-subjects* (jscl::new))
+;;; RX emitters
+
 
 ;;; emiter listener
-;;;
-;;; (mordev:rx-listen :err #'error-out-fn)
-;;;
 (defun rx-listen (name listener)
     (let ((subj (make-new #j:Rx:Subject)))
         (setf (oget *moren-rx-subjects* (concat "$" (string name))) subj)
@@ -55,9 +52,6 @@
 (export '(mordev::rx-listen))
 
 ;;; rx emiter
-;;;
-;;; (mordev:rx-emit :err '"error")
-;;;
 (defun rx-emit (name arg)
     (let ((subj))
         (setq subj (oget *moren-rx-subjects* (concat "$" (string name))))
@@ -76,7 +70,6 @@
 
 ;;; external interface for reset console command
 ;;; => (moren:jqreset)
-;;;
 (defun jqreset ()
     ;; full jq reset
     (#j:jqconsole:Reset)
@@ -89,14 +82,13 @@
 (export '(mordev::jqreset))
 
 
-;;;
+
 ;;; Shadow JQ-console history
 ;;; console history stored in localStorage
-;;;  does not match the entries in the jqconsole  dom structure
-;;;
+;;; does not match the entries in the jqconsole dom structure
 
 
-;;;
+
 ;;; get repl history from localStorage and place to array
 ;;;
 ;;; (moren:explore-repl-history)
@@ -111,7 +103,6 @@
     (values))
 
 
-;;;
 ;;; look repl history from to items
 ;;;
 ;;;     (moren:look-repl-history 5 10)
@@ -139,8 +130,6 @@
         (values-list nil)))
 
 
-
-;;;
 ;;; take repl history item
 ;;;
 ;;; if  lazily flipping long history by with by keystroke, just type
@@ -161,17 +150,14 @@
         ;; wait enter press
         (values) ))
 
-;;;
 ;;; dump repl history to file
 ;;;
 ;;; (mordev:dump-repl-history "/workplace/repl"
-
 (defun sh-glue ()
     (apply #'concat
            (map 'list (lambda (x) (concat x #\newline))
                 #j:jqconsole:history)))
 
-;;;(defparameter *repl-hist-pathname-template* "repl-history/devrepl-")
 
 (defun sh-uniqid-repl-dump()
     (concat *repl-hist-pathname-template* (get-internal-real-time) ".txt"))
@@ -195,12 +181,14 @@
 ;;;    DEV REPL
 
 ;;; *standard-output*
-;;;
-;;; assign global variable *standard-output*
-;;; as stream
-
 (defun %write-string (string &optional (escape t))
     (#j:jqconsole:Write string "jqconsole-output" "" escape))
+
+;;; *standard-output* function
+;;; escape t - disable html tags
+;;; escape nil - enable
+(defun %write-string (string &optional (escape t))
+    (#j:jqconsole:Write string "jqconsole-output" escape))
 
 
 (defun %moren-standard-output-up ()
@@ -215,7 +203,15 @@
                   (lambda (char) (rx-emit :char-out (string char))
                       (values-list nil))
                   (lambda (string) (rx-emit :string-out string)
-                      (values-list nil) ))))
+                      (values-list nil) )))
+    ;; set moren-output with html tags
+    (setq *moren-html-output*
+          (vector 'stream
+                  (lambda (char) (rx-emit :char-out (string char))
+                      (values-list nil))
+                  (lambda (string) (rx-emit :string-html-out string)
+                      (values-list nil) ))) )
+
 
 (defun %mordev-standard-error ()
     (setq *mordev-standard-error*
@@ -234,6 +230,10 @@
 (defun %string-out-fn (string)
     (%write-string string))
 
+;;; rx-emit :string-html-out
+(defun %string-html-out-fn (string)
+    (%write-string string nil))
+
 
 ;;; rx-emit :err-char-out
 (defun %err-char-out-fn (char)
@@ -248,6 +248,7 @@
     (#j:jqconsole:Write string "jqconsole-error"))
 
 
+;;; rx-emit :out
 (defun %repl-print-output (result)
     (dolist (x result)
         (#j:jqconsole:Write (concat (write-to-string x) #\Newline) "jqconsole-return")))
@@ -336,6 +337,7 @@
 ;;; repl-eval handler
 ;;; moren:rx-emit :repl-eval
 
+#|
 (defun %repl-eval (input)
     (%js-try
      (handler-case
@@ -350,8 +352,21 @@
                  (or
                   (oget err "message") (_errmsg-expand err)))))
     (values-list nil) )
+|#
 
-
+(defun %repl-eval (input)
+    (%js-try
+     (handler-case
+         (let* ((form (read-from-string input))
+                (x (multiple-value-list (jscl::eval-interactive form))))
+             (rx-emit :out x))
+       (error (msg)
+           (format *mordev-standard-error* "ERROR: ~a~%" (_errmsg-expand msg))))
+     (catch (err)
+         (format *mordev-standard-error* "ERROR: ~a~%"
+                 (or
+                  (oget err "message") (_errmsg-expand err)))))
+    (values-list nil) )
 
 
 ;;; repl toplevel
