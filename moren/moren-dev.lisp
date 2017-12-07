@@ -109,7 +109,7 @@
 ;;;     => items from 5 till 10
 ;;;
 ;;;     (moren:look-repl-history)
-;;;     => all items
+;;;     => from o to 5
 ;;;
 ;;;     (moren:look-repl-history 10)
 ;;;     => items from 10 till end
@@ -123,7 +123,12 @@
             (setq last (1- lh)))
         (tagbody fsm
          next
-           (format t "~a: ~a~%" num (aref *repl-history num))
+           ;;(format t "~a: ~a~%" num (aref *repl-history num))
+           (#j:jqconsole:Write
+            (concat num ": "
+                    (write-to-string (aref *repl-history num))
+                    #\Newline)
+            "jqconsole-return")
            (setq num (1+ num))
            (if (<= num last) (go next))
          stop)
