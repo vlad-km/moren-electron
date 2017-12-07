@@ -36,7 +36,8 @@
         ;; moren config template
         ;; for first start
         (list
-         (list "lores-sdf-repository" "./sdf"))))
+         (list "lores-sdf-repository" "./sdf")
+         (list "moren-boot" (list "./sys/lestrade" "./sys/lores")) )))
 
     (defun moren/check-firstly ()
         (unless (moren/get-config "moren-alive-timestamp")
@@ -44,6 +45,32 @@
             (dolist (x config-template)
                 (moren/set-config (car x) (cadr x))))))
 
+
+(defun moren/set-boot-list (lst)
+    (moren/set-config "moren-boot" lst))
+
+
+(defun moren/boot-from (path)
+    (let ((exists (#j:Fs:existsSync path)))
+        (cond (exists
+               (format t "boot require ~a~%" path)
+               (time (require path)))
+              (t
+               (format t "boot package ~a not exists~%" path)))))
+
+(defun moren/boot-bundles ()
+    (#j:console:log "boot-bundles" (find-package :mordev))
+    (dolist (path (moren/get-config "moren-boot"))
+        (moren/boot-from path)))
+
+(defun moren/boot-bundles ()
+    (#j:console:log "boot-bundles" (find-package :mordev))
+    (%js-try
+     (progn
+         (dolist (path (moren/get-config "moren-boot"))
+             (moren/boot-from path)))
+     (catch (msg)
+         (#j:console:log "что-то пошло не так" msg))))
 
 
 

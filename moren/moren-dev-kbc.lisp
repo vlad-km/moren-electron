@@ -176,10 +176,12 @@
 ;;; Apropos
 ;;;
 
+#|
 (defun moren-map-symbols (fn package)
     (map-for-in fn (%package-symbols package))
     (dolist (used (package-use-list package))
         (jscl::%map-external-symbols fn package)))
+|#
 
 #|
 (defun moren-map-apropos-symbols (string package)
@@ -196,6 +198,7 @@
             (do-symbols (symbol package) (handle-symbol symbol)))))
 |#
 
+#|
 (defun moren-map-apropos-symbols (string &optional (package *package*))
     (let ((fn (lambda (symbol)
                   (format
@@ -215,10 +218,10 @@
                 (jscl::%map-external-symbols (lambda (symbol) (handle-symbol symbol)) package))
             )))
 
+|#
 
 
-
-
+#|
 (defun moren-apropos-list (string &optional package external-only)
     (let (symbols)
         (map-apropos-symbols
@@ -229,6 +232,7 @@
 
 (defun moren-apropos (string)
     (moren-map-apropos-symbols (string string)))
+|#
 
 ;;;
 ;;; list all packages
@@ -245,15 +249,14 @@
            (expr)
            (stream)
            (symbol))
-        (format *mordev-standard-output* "~%---> Inspect ")
+        ;;(format *mordev-standard-output* "~%---> Inspect ")
         (handler-case
             (progn
                 (setq stream (jscl::make-string-stream text))
                 (setq value (jscl::ls-read stream))
-                (prin1 value)
-                (prin1 '<---)
+                ;;(prin1 value)
+                ;;(prin1 '<---)
                 (terpri)
-                (describe value))
           (error (err)
               (format *mordev-standard-output* "Inspector: what that ~s ?" (jscl::!condition-args err))))))
 

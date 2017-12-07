@@ -30,6 +30,7 @@
 (defvar *moren-html-output* nil)
 (defvar *mordev-standard-error* nil)
 
+(defvar *lestrade-wtf* nil)
 
 (in-package :cl-user)
 
