@@ -117,6 +117,7 @@
 ;;; Reset console
 
 (defun %kb-reset-console-fn ()
+    (dump-repl-history)
     (mordev:jqreset))
 
 
