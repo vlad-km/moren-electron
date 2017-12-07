@@ -6,53 +6,17 @@
 ;;; Keyboard commands
 ;;; Copyright © 2017 Vladimir Mezentsev
 ;;;
-;;;
-;;; MOREN environment created for rapidly programming and prototyping programs
-;;; on JSCL language (subset of Common Lisp) in yours browser.
-;;;
-;;; MOREN is free software: you can redistribute it and/or modify it under
-;;; the terms of the GNU General  Public License as published by the Free
-;;; Software Foundation,  either version  3 of the  License, or  (at your
-;;; option) any later version.
-;;;
-;;; MOREN is distributed  in the hope that it will  be useful, but WITHOUT
-;;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-;;; for more details.
-;;;
-;;; You should  have received a  copy of  the GNU General  Public License
-;;; Version 3 from  <http://www.gnu.org/licenses/>.
-;;;
-;;; JSCL   - JSCL is a Common Lisp to Javascript compiler, which is bootstrapped
-;;; from Common Lisp and executed from the browser.
-;;; https://github.com/jscl-project/jscl
-;;;
-;;; Version for Electron
-;;;
-;;; Electron is a framework for creating native applications with web technologies
-;;; like JavaScript, HTML, and CSS.
-;;; https://electron.atom.io/
-;;;
-;;;
-
-;;;
-;;;                             MOREN NAMESPACE
-;;;
 
 (in-package :mordev)
 
 
 ;;; start electron section
-
-
 (defun show-open-dialog ()
     (let ((prop (mkjso "properties" (vector (lisp-to-js "openFile")
                                             (lisp-to-js "multiSelections"))))
           (select))
         (setq select (vector-to-list (#j:electron:remote:dialog:showOpenDialog prop)))
         (mapcar (lambda (x) (js-to-lisp x)) select)))
-
-
 
 ;;; set app menu
 (defun set-app-topmenu (menu)
@@ -82,10 +46,8 @@
 
 
 ;;; context menu
-;;;
 ;;; options - object {x:nnn, y:nnn}
 ;;;           mouse cursor position
-;;;
 (defun menu-popup (menu &optional browser-window options)
     (funcall ((oget menu "popup" "bind")
               menu
@@ -101,7 +63,6 @@
             (funcall cc x))))
 
 
-
 ;;; insert item to menu position
 (defun menu-insert (menu position item)
     (funcall ((oget menu "insert" "bind") menu position item)))
@@ -113,26 +74,19 @@
 ;;; keyboard handlers
 
 ;;; Control+Shift+R
-;;;
 ;;; Reset console
-
 (defun %kb-reset-console-fn ()
     (dump-repl-history)
     (mordev:jqreset))
 
 
-
 ;;; Control+Shift+H+E
-;;;
 ;;; History explore
-;;;
 (defun %kb-sh-explore-fn ()
     (mordev:explore-repl-history))
 
 
-;;;
 ;;; Generic fn for history command
-;;;
 (defun %kb-sh-generic-template (template)
     (let ((state #j:jqconsole:state))
         ;; switch jqconsole state to input
@@ -146,49 +100,36 @@
 
 
 ;;; Control+Shift+H+L
-;;;
 ;;; History look
 ;;; read start end from console prompt
-;;;
-
 (defun %kb-sh-look-fn ()
     (%kb-sh-generic-template "(mordev:look-repl-history)"))
 
 
 ;;; Control+Shift+H+I
-;;;
 ;;; History item
 ;;; read item number from console prompt
-;;;
-
 (defun %kb-sh-take-item-fn ()
     (%kb-sh-generic-template "(mordev:take-repl-history-item ?)"))
 
 
 ;;; Control+Shift+H+D
-;;;
 ;;; Dump History to file
-;;;
 (defun %kb-sh-dump-fn ()
     (mordev:dump-repl-history))
 
 
-;;;
 ;;; Describe selected
-;;;
 (defun %kb-describe-fn ()
     (let* ((selected (#j:window:getSelection))
            (text (funcall ((oget selected "toString" "bind") selected)))
            (expr)
            (stream)
            (symbol))
-        ;;(format *mordev-standard-output* "~%---> Inspect ")
         (handler-case
             (progn
                 (setq stream (jscl::make-string-stream text))
                 (setq value (jscl::ls-read stream))
-                ;;(prin1 value)
-                ;;(prin1 '<---)
                 (terpri)
                 (funcall *lestrade-wtf* value))
           (error (err)
@@ -196,8 +137,6 @@
 
 
 ;;; Moren top menu
-;;;
-
 (defun moren-top-menu-template()
     (vector
      (mkjso "label" "Moren"
@@ -270,10 +209,7 @@
       (moren-top-menu-template))))
 
 
-;;;
 ;;; Moren popup menu
-;;;
-
 (defun moren-popup-describe-fn ()
     (new-menu-item  "label" "Describe selected"
                     "click" (lambda (item bw event)
