@@ -34,29 +34,32 @@ For use in the programs, all the functionality provided by Node and Chrome is av
 
 The final application can be ported to a single bundle for use in a browser, or as a desktop application (use Electron facilities).
 
+
 ## Components
 
-- **MOREN** - Moren environment REPL based on: **KLIB**, **LORES**, **LESTRADE**
+- MOREN - Moren environment REPL based on: `KLIB`, `LORES`, `LESTRADE`
 
-- **KLIB** - addition JSCL functions (like simple generic functions, structures), 
+- KLIB - addition JSCL functions (like simple generic functions, structures), 
   interaction with the Chromium (DOM, HTML, String, Array) and others
 
-- **GENERIC** - simple generic function, part of `KLIB`
+- GENERIC - simple generic function, part of `KLIB`
 
-- **DOM** - DOM manipulation functions, part of `KLIB`
+- DOM - DOM manipulation functions, part of `KLIB`
 
-- **HTML** - HTML tags definition. Part of `KLIB`
+- HTML - HTML tags definition. Part of `KLIB`
 
-- **LORES** - is a tool, designed to help developers deal with large programs contained 
+- LORES - is a tool, designed to help developers deal with large programs contained 
   in multiple files (system) and her compilation
 
-- **LESTRADE** - is a object Inspector
+- LESTRADE - is a object Inspector
 
-- **CME** - built-in editor, based on `CodeMirror`
+- CME - built-in editor
 
-- **REPL** - Moren environment repl ready for instalation and use (contains all need bundles and folder structures)
+- REPL - contains all need bundles and folder structures for instalation and use Moren environment repl 
 
-- **SDF** - collection system definition files for each components `(lores:defsys syntax)`
+- SDF - collection system definition files for each components `(lores:defsys syntax)`
+
+
 
 ## Documentation
 
@@ -66,7 +69,7 @@ Will be addition as they available, asap.
 
 ## Installation
 
-Just copy `REPL` folder to you computer and follow the steps in the installation instructions (`readme.md` in `REPL`)
+Just copy `REPL` folder to you computer and follow the steps in the installation instructions (`readme` in `REPL`)
 
 ## License
 
