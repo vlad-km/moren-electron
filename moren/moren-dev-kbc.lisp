@@ -173,14 +173,6 @@
     (mordev:dump-repl-history))
 
 
-
-
-;;;
-;;; list all packages
-;;;
-(defun %kb-aprop-all-packages ()
-    (mordev:rx-emit :out (list-all-packages)))
-
 ;;;
 ;;; Describe selected
 ;;;
