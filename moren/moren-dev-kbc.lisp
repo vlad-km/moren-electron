@@ -172,67 +172,8 @@
 (defun %kb-sh-dump-fn ()
     (mordev:dump-repl-history))
 
-;;;
-;;; Apropos
-;;;
-
-#|
-(defun moren-map-symbols (fn package)
-    (map-for-in fn (%package-symbols package))
-    (dolist (used (package-use-list package))
-        (jscl::%map-external-symbols fn package)))
-|#
-
-#|
-(defun moren-map-apropos-symbols (string package)
-    (let ((fn (lambda (symbol)
-                  (format
-                   t
-                   "~a~%"
-                   (concat (string symbol) " "
-                           (if (boundp symbol) " ((bound)"
-                               (if (fboundp symbol) " (fbound)" "  ")))))))
-        (flet ((handle-symbol (symbol)
-                   (when (search string (symbol-name symbol) :test #'char-equal)
-                       (funcall fn symbol))))
-            (do-symbols (symbol package) (handle-symbol symbol)))))
-|#
-
-#|
-(defun moren-map-apropos-symbols (string &optional (package *package*))
-    (let ((fn (lambda (symbol)
-                  (format
-                   t
-                   "~a~%"
-                   (concat (string symbol) " "
-                           (if (boundp symbol) " ((bound)"
-                               (if (fboundp symbol) " (fbound)" "  ")))))))
-        (flet ((handle-symbol (symbol)
-                   (when (search string (symbol-name symbol) :test #'char-equal)
-                       (funcall fn symbol))))
-
-            ;;(do-symbols (symbol package) (handle-symbol symbol))
-
-            (jscl::map-for-in (lambda (symbol) (handle-symbol symbol)) (jscl::%package-symbols package))
-            (dolist (used (package-use-list package))
-                (jscl::%map-external-symbols (lambda (symbol) (handle-symbol symbol)) package))
-            )))
-
-|#
 
 
-#|
-(defun moren-apropos-list (string &optional package external-only)
-    (let (symbols)
-        (map-apropos-symbols
-         (lambda (symbol)
-             (pushnew symbol symbols :test #'eq))
-         string package external-only)
-        symbols))
-
-(defun moren-apropos (string)
-    (moren-map-apropos-symbols (string string)))
-|#
 
 ;;;
 ;;; list all packages
@@ -257,6 +198,7 @@
                 ;;(prin1 value)
                 ;;(prin1 '<---)
                 (terpri)
+                (funcall *lestrade-wtf* value))
           (error (err)
               (format *mordev-standard-output* "Inspector: what that ~s ?" (jscl::!condition-args err))))))
 
