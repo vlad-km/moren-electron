@@ -101,13 +101,9 @@
         (electron:set-autohide-menubar)
         (electron:set-Menu-Bar-Visibility nil)
         ;; repl up
-        ;;(setq jq (#j:$ "#moren-dev-repl-id"))
-        ;;(setf #j:jqconsole (funcall ((oget jq "jqconsole" "bind") jq  "" "")))
-        ;;(jq-matching)
         (jq-console-dom-check)
         (jq-console-setup)
         (%repl-load-history)
-        ;;(%moren-standard-output-up)
         (%mordev-standard-output)
         (%mordev-standard-error)
         (setq *standard-output* *mordev-standard-output*)

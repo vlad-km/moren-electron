@@ -260,8 +260,6 @@
 
 
 
-
-
 ;;;
 ;;; Repl history
 ;;;
@@ -293,9 +291,8 @@
                 (#j:jqconsole:SetHistory (funcall ((oget hv "slice" "bind") hv cutcount))) )
             (setq hv nil) ) ))
 
-;;;
+
 ;;; Borrowed from original jscl/repl-web/repl.lisp
-;;;
 ;;; Decides wheater the input the user has entered is completed or we
 ;;; should accept one more line.
 (defun %indent-level (string)
@@ -337,23 +334,6 @@
 ;;; repl-eval handler
 ;;; moren:rx-emit :repl-eval
 
-#|
-(defun %repl-eval (input)
-    (%js-try
-     (handler-case
-         (let ((form (read-from-string input)))
-             (dolist (x (multiple-value-list (jscl::eval-interactive form)))
-                 ;;(rx-emit :out x)
-                 (format *mordev-standard-output* "~a~%" x)))
-       (error (msg)
-           (format *mordev-standard-error* "ERROR: ~a~%" (_errmsg-expand msg))))
-     (catch (err)
-         (format *mordev-standard-error* "ERROR: ~a~%"
-                 (or
-                  (oget err "message") (_errmsg-expand err)))))
-    (values-list nil) )
-|#
-
 (defun %repl-eval (input)
     (%js-try
      (handler-case
@@ -387,7 +367,6 @@
                 (package-name *package*) ">")))
 
 (defun %repl ()
-    ;;(#j:jqconsole:Write (concat (package-name *package*) "> ") "jqconsole-prompt")
     (#j:jqconsole:Write (date/make-prompt) "jqconsole-prompt")
     (flet ((repl-read (input)
                (when (> (length input) 0)
