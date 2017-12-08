@@ -107,4 +107,17 @@
      100))
 
 
+(defun lores/done-unit-compile (pdu ec start stop)
+    ;;(#j:setTimeout
+    ;;(lambda ()
+    (lores/mess-0
+     "~a: Compile ~a/~a/~a exprs. Errors ~a. Time ~a sec~%~%"
+     (def-unit-depend-name pdu)
+     ec (length (def-unit-sexpr pdu)) (length (def-unit-pcode pdu))
+     *compile-error*
+     (/ (- stop start) 1000.0))
+    (incf *complen* (length (def-unit-sexpr pdu))))
+;;100))
+
+
 ;;; EOF
