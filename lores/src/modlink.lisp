@@ -94,6 +94,39 @@ return l6.fvalue(values,l1,l2.value,l5.fvalue(internals.pv,l4.fvalue(internals.p
         ))
 
 
+(defun modlink (sysname module-pathname &key (full nil)(verbose t))
+    (let ((stream)
+          (topnames nil)
+          (components))
+
+        (setq stream (lores/open-pcode-stream-output module-pathname))
+        (lores/module-header stream)
+
+        (if full
+            ;; if full system bundle get all top-dependencie names
+            (setq topnames (lores/flatten-top-depends
+                            (def-sys-top-depends (gethash (sdfn sysname) *defsystems*) ))))
+
+        (lores/mess-0 "~%Bundle up ~s with ~a components~%" (string sysname) (1+ (length topnames)))
+
+        (dolist (sys-from (append topnames (list sysname)))
+            (setq components (defsys/components-flatten sys-from))
+            (lores/mess-0 "   Link ~s with ~a components~%" (string sys-from) (length components))
+            (dolist (unit components)
+                (setq stm (unit/get-pcode unit))
+                (lores/mess-0 "      File ~a: ~a statements ~%" (def-unit-depend-name unit) (length stm))
+                (dolist (x stm)
+                    (fs-stream-write
+                     stream
+                     (lores/stm-wrapper
+                      (jstring:replace x *nl* " ") ) ) )))
+
+        (lores/module-tail stream)
+        (funcall ((oget *pcode-output-stream* "end" "bind") *pcode-output-stream*))
+        (lores/mess-0 "Done~%")
+        ))
+
+
 
 (export '(modlink))
 
