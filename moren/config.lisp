@@ -37,7 +37,7 @@
         ;; for first start
         (list
          (list "lores-sdf-repository" "./sdf")
-         (list "moren-boot" (list "./sys/lestrade" "./sys/lores")) )))
+         (list "moren-boot" nil) )))
 
     (defun moren/check-firstly ()
         (unless (moren/get-config "moren-alive-timestamp")
@@ -58,21 +58,32 @@
               (t
                (format t "boot package ~a not exists~%" path)))))
 
+#|
 (defun moren/boot-bundles ()
     (#j:console:log "boot-bundles" (find-package :mordev))
     (dolist (path (moren/get-config "moren-boot"))
         (moren/boot-from path)))
+|#
 
 (defun moren/boot-bundles ()
-    (#j:console:log "boot-bundles" (find-package :mordev))
+    ;;(#j:console:log "boot-bundles" (find-package :mordev))
     (%js-try
      (progn
          (dolist (path (moren/get-config "moren-boot"))
              (moren/boot-from path)))
      (catch (msg)
-         (#j:console:log "что-то пошло не так" msg))))
+         (#j:console:log "Something went wrong" msg *package*))))
 
 
+
+;;; user ini file
+(defun moren/user-ini-file ()
+    (let ((exists (#j:Fs:existsSync ".moren-ini.lisp"))
+          (pdu))
+        (when exists
+            (setq pdu (lores::make-def-unit :depend-name ".moren-ini"
+                                            :pathname ".moren-ini.lisp"))
+            (lores::lores/qloader nil (list pdu) ))))
 
 
 (in-package :cl-user)

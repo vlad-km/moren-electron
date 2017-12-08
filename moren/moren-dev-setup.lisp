@@ -108,14 +108,17 @@
         (%mordev-standard-output)
         (%mordev-standard-error)
         (setq *standard-output* *mordev-standard-output*)
+        (lores:stream-set *standard-output*)
         (%%all-emitters-up)
-        (time (moren/boot-bundles))
+        (moren/boot-bundles)
+        (moren/user-ini-file)
         ;;(%%all-emitters-up)
         ;;(moren/boot-bundles)
         (%mordev-keyboard-setup)
         (#j:window:addEventListener "load"
                                     (lambda (&rest args)
                                         (%repl-load-history)
+                                        (format t "~%READY~%")
                                         (%repl)))))
 
 

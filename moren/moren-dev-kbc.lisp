@@ -131,7 +131,7 @@
                 (setq stream (jscl::make-string-stream text))
                 (setq value (jscl::ls-read stream))
                 (terpri)
-                (funcall *lestrade-wtf* value))
+                (lestrade:wtf value))
           (error (err)
               (format *mordev-standard-output* "Inspector: what that ~s ?" (jscl::!condition-args err))))))
 
