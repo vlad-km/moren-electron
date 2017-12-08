@@ -64,6 +64,14 @@
      100))
 
 
+(defun lores/done-compile ()
+    (lores/mess-0 "Done~%" )
+    (lores/mess-0 "Compile ~a exprs ~%" (sysq/total-sexpr-compile) )
+    (lores/mess-0 "Errors ~a  ~%" *compile-error* )
+    (lores/mess-0 "Total execution time ~a seconds~%" (roundnum *lores-exec-time* 3))
+    (lores/mess-0 "        elapsed time ~a seconds~%" (roundnum (/ (- (get-internal-real-time)
+                                                                      *lores-start-time*) 1000.0) 3)  ))
+
 
 
 ;;; EOF
