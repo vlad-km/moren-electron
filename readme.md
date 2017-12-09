@@ -51,6 +51,8 @@ The final application can be ported to a single bundle for use in a browser, or 
 - LORES - is a tool, designed to help developers deal with large programs contained 
   in multiple files (system) and her compilation
 
+- LORESDOC - is tool for creating documentation templates
+
 - LESTRADE - is a object Inspector
 
 - CME - built-in editor
