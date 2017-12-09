@@ -71,11 +71,11 @@ Will be addition as they available, asap.
 
 Just copy `REPL` folder to you computer and follow the steps in the installation instructions (`readme` in `REPL`)
 
-## License
-
-GNU General Public License v3.0
-
+# Copyright
 Copyright © 2017 Vladimir Mezentsev
+
+## License
+GNU General Public License v3.0
 
 
 [jscl]: <https://github.com/jscl-project/jscl>
