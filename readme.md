@@ -71,7 +71,7 @@ Will be addition as they available, asap.
 
 Just copy `REPL` folder to you computer and follow the steps in the installation instructions (`readme` in `REPL`)
 
-# Copyright
+## Copyright
 Copyright © 2017 Vladimir Mezentsev
 
 ## License
