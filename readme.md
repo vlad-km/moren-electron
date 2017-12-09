@@ -22,7 +22,7 @@ In other words, now you do not need to learn, install and configure the Common L
 Moren, an environment that allows you to compile yourself step by step. 
 All the components of the environment included in this version are compiled in it, without the use of a host compiler.
 The only component for which the host compiler is used (Clozure Common Lisp Version 1.11-r16635 WindowsX8664) is `jscl.js` 
-with some fixes in the original code (watch git `vald-km/jscl` brunch `prod` for more details).
+with some fixes in the original code (watch git `vald-km/jscl` branch `prod` for more details).
 
 Moren environment contains all the minimum functionality. Other additions, as necessary, can be developed and debugged in Moren, and added  `on fly`
 
