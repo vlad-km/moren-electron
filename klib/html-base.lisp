@@ -148,6 +148,11 @@
 (export '(html::input))
 
 
+(defun label (&rest parms)
+    (produce "label" parms))
+(export '(html::label))
+
+
 ;;; html button tag
 ;;;
 ;;;
