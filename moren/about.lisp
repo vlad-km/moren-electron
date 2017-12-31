@@ -24,22 +24,6 @@
 
 (defparameter *about-win* nil)
 
-#|
-(defun show-about ()
-    (setf (oget *about-conf* "parent")
-          (#j:electron:remote:getCurrentWindow)
-          (oget *about-conf* "modal") t)
-    (setq *about-win*  (make-new #j:electron:remote:BrowserWindow *about-conf*))
-    (funcall ((oget *about-win* "loadURL" "bind")
-              *about-win*
-              (concat "file://" #j:__dirname "\\about.html")))
-    (funcall ((oget *about-win* "once" "bind")
-              *about-win*
-              "ready-to-show"
-              (lambda ()
-                  (funcall ((oget *about-wun* "show" "bind") *about-win*)))))
-    )
-|#
 
 (defun show-about ()
     (setf (oget *about-conf* "parent")
