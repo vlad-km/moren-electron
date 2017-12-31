@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/vlad-km">
+    <img src="logo/lizard-logo-c.png" alt="Moren" title="Moren environment" height="64" />
+  </a>
+</p>
+
 # Moren environment 
 
 **Moren environment** created for rapidly programming and prototyping programs on [JSCL][jscl] language (subset of Common Lisp) in [Electron][electron].
