@@ -1,20 +1,17 @@
 {
-  "name": "moren-repl",
-  "version": "0.0.1",
-  "description": "Moren environment repl",
+  "name": "Moren",
+  "version": "1.0.1",
+  "description": "Moren environment",
   "main": "smd.js",
   "scripts": {
-    "start": "electron smd.js"
+    "start": "electron esmd.js"
   },
   "keywords": [
     "lisp",
-    "jscl",
-    "moren",
     "compiler"
   ],
-  "license": "GPL-3.0" ,
+  "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "1.7.10"
   }
-
 }
