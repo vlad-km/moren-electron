@@ -1,0 +1,7 @@
+{
+  "name": "html",
+  "version": "0.1.0",
+  "description": "Additional html tags",
+  "main": "html.js",
+  "license": "GPL-3.0"
+}
