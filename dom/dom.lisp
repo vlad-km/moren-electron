@@ -50,7 +50,7 @@
 ;;; Return: none
 ;;;
 (export '(dom::set-value))
-(defun set-value (text)
+(defun set-value (element text)
     (setf (jscl::oget element "value") text)
     (values-list nil))
 
