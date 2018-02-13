@@ -1,6 +1,6 @@
 # Moren environment repl
 
-Screenshot of begin of session  [./repl/Moren-session-start.png]
+Screenshot of begin of session  [./Moren-session-start.png]
 
 
 # Copyright
