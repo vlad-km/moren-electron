@@ -16,7 +16,7 @@ When we see the increasingly popular programming language, we see in him the con
 
 ## Status
 
-`Development`
+`Under development. May be any changes.`
 
 
 ## Concept
