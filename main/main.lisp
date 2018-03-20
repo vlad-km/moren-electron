@@ -62,6 +62,40 @@
 (defparameter landdir "./")
 
 
+(defun check-file-exists (pathname)
+    (#j:Fs:existsSync pathname))
+
+
+(defun read-sync-from (path &optional (encoding "utf-8"))
+    (let ((data))
+        (handler-case
+            (progn
+                (setq data (#j:Fs:readFileSync path encoding))
+                (cond ((jscl::js-null-p data)
+                       (setq data nil))
+                      (t (setq data (#j:JSON:parse data)))))
+          (error (msg)
+              (error msg)))
+        data))
+
+
+(defun awake (from)
+    (let ((initial (read-sync-from from))
+          (bp))
+        (when initial
+            (if (setq bp (jso:_get (initial "bootpage")))
+                (setq boot-page bp))
+            (if (setq bp (jso:_get (initial "splashpage")))
+                (setq splash-page bp))
+            (if (setq bp (jso:_get (initial "title")))
+                (jso:_set (main-options "title") bp))
+            (if (setq bp (jso:_get (initial "icon")))
+                (jso:_set (main-options "icon") bp))
+            (if (setq bp (jso:_get (initial "background")))
+                (jso:_set (main-options "backgroundColor") bp))
+            (if (setq bp (jso:_get (initial "webSecurity")))
+                (jso:_set (main-options "webPreferences" "webSecurity") bp)) )))
+
 
 (defun main-window ()
     (let ()
