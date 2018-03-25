@@ -105,7 +105,8 @@
     (jso:mcall (win "close")))
 
 
-;;; Minimizes the window. On some platforms the minimized window will be shown in the Dock.
+;;; Minimizes the window. On some platforms the minimized window
+;;; will be shown in the Dock.
 (external minimize)
 (defun minimize (win)
     (jso:mcall (win "minimize")))
