@@ -79,6 +79,38 @@
         data))
 
 
+(defun moren-args (pref &optional (delim #\=) remote)
+    (let ((result (make-hash-table :test #'equal))
+          (kv)
+          (lstr))
+        (dolist (it (nthcdr 2 (vector-to-list
+                               (if remote
+                                   #j:electron:remote:process:argv
+                                   #j:process:argv))))
+            (setq lstr (jscl::js-to-lisp it))
+            (when (= (jstring:index-of lstr pref) 0)
+                (setq kv (jscl::vector-to-list (jstring:split lstr delim)))
+                (setf (gethash (car kv) result) (cadr kv))))
+        result))
+
+
+(defun moren-args (pref &optional (delim #\=) remote)
+    (let ((result (make-hash-table :test #'equal))
+          (kv)
+          (lstr))
+        (dolist (it (vector-to-list
+                     (jarray:splice
+                      (if remote #j:electron:remote:process:argv
+                          #j:process:argv)
+                      2)))
+            (setq lstr (jscl::js-to-lisp it))
+            (when (= (jstring:index-of lstr pref) 0)
+                (setq kv (jscl::vector-to-list (jstring:split lstr delim)))
+                (setf (gethash (car kv) result) (cadr kv))))
+        result))
+
+
+
 (defun awake (from)
     (let ((initial (read-sync-from from))
           (bp))
@@ -87,6 +119,10 @@
                 (setq boot-page bp))
             (if (setq bp (jso:_get (initial "splashpage")))
                 (setq splash-page bp))
+            (if (setq bp (jso:_get (initial "width")))
+                (jso:_set (main-options "width") bp))
+            (if (setq bp (jso:_get (initial "height")))
+                (jso:_set (main-options "height") bp))
             (if (setq bp (jso:_get (initial "title")))
                 (jso:_set (main-options "title") bp))
             (if (setq bp (jso:_get (initial "icon")))
@@ -154,6 +190,9 @@
     (setf #j:url (require "url"))
     (setf #j:path (require "path"))
     (setq landdir (#j:process:cwd))
+    (let ((val (gethash "--moren-init-file" (moren-args "--moren"))))
+        (unless val (setq val "./.env/stand.json"))
+        (awake val))
     (#j:App:once "ready"
                  (lambda (&optional a b c d)
                      (main-window))))
